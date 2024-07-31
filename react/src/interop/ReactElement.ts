@@ -1,10 +1,13 @@
 import ReactDom from 'react-dom/client'
 
 export class ReactElement extends HTMLElement {
+  private __html: string
   private mutationObserver: MutationObserver
 
   constructor(private createElement: (props: object) => JSX.Element) {
     super()
+    // Store the initial HTML content to pass as a prop
+    this.__html = this.innerHTML
     // Re-render the component if the element's attributes change
     this.mutationObserver = new MutationObserver(() => {
       this.unmount()
@@ -52,7 +55,7 @@ export class ReactElement extends HTMLElement {
             ReactElement.parseValue(value)
         return props
       },
-      {},
+      this.__html ? { __html: this.__html } : {},
     )
   }
 

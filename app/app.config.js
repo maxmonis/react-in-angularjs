@@ -28,7 +28,11 @@ angular.
               $window.removeEventListener('quotes', handleEvent);
             });
           },
-          template: '<quotes-page angular-quote="{{quote}}"></quotes-page>'
+          template: [
+            '<quotes-page angular-quote="{{quote}}">',
+              '<h1>Quotes</h1>',
+            '</quotes-page>'
+          ].join('')
         }).
         otherwise('/phones');
     }

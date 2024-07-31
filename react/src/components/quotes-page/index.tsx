@@ -2,7 +2,13 @@ import React from 'react'
 import { InternalLink } from '../internal-link'
 import styles from './styles.module.css'
 
-export function QuotesPage({ angularQuote }: { angularQuote?: Quote }) {
+export function QuotesPage({
+  __html,
+  angularQuote,
+}: {
+  __html: string
+  angularQuote?: Quote
+}) {
   const [quote, setQuote] = React.useState<Quote>()
   React.useEffect(loadQuote, [angularQuote])
   function loadQuote() {
@@ -10,7 +16,7 @@ export function QuotesPage({ angularQuote }: { angularQuote?: Quote }) {
   }
   return (
     <div>
-      <h1>Quotes</h1>
+      <span dangerouslySetInnerHTML={{ __html }} />
       <QuoteItem quote={angularQuote} source='Angular' />
       <QuoteItem source='React' {...{ quote }} />
       <button
