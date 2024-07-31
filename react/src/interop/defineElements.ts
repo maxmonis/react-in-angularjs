@@ -2,8 +2,8 @@ import React from 'react'
 import { elements } from './elements'
 import { ReactElement } from './ReactElement'
 
-const createElement = (element: React.ElementType) =>
-  React.createElement(element)
+const createElement = (element: React.ElementType, props: object) =>
+  React.createElement(element, props)
 
 /**
  * Defines a custom HTML element for each of the components
@@ -15,7 +15,7 @@ export function defineElements() {
       element.tag,
       class extends ReactElement {
         constructor() {
-          super(() => createElement(element))
+          super(props => createElement(element, props))
         }
       },
     )
