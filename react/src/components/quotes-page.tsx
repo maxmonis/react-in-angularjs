@@ -1,5 +1,6 @@
 import React from 'react'
 import { InternalLink } from './internal-link'
+import styles from '../styles/quotes-page.module.css'
 
 export function QuotesPage({ angularQuote }: { angularQuote?: Quote }) {
   const [quote, setQuote] = React.useState<Quote>()
@@ -12,6 +13,14 @@ export function QuotesPage({ angularQuote }: { angularQuote?: Quote }) {
       <h1>Quotes</h1>
       <QuoteItem quote={angularQuote} source='Angular' />
       <QuoteItem source='React' {...{ quote }} />
+      <button
+        className={styles.button}
+        onClick={() => {
+          window.dispatchEvent(new CustomEvent('quotes', { detail: 'reload' }))
+        }}
+      >
+        Reload
+      </button>
       <InternalLink />
     </div>
   )

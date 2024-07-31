@@ -12,7 +12,7 @@ angular.
           template: '<phone-detail></phone-detail>'
         }).
         when('/quotes', {
-          controller: function($http, $scope) {
+          controller: function($http, $scope, $window) {
             loadQuote();
             function loadQuote() {
               $http.get('https://api.quotable.io/random')
@@ -20,6 +20,13 @@ angular.
                   $scope.quote = response.data;
                 });
             }
+            function handleEvent(event) {
+              if (event.detail === 'reload') loadQuote();
+            }
+            $window.addEventListener('quotes', handleEvent);
+            $scope.$on('$destroy', function() {
+              $window.removeEventListener('quotes', handleEvent);
+            });
           },
           template: '<quotes-page angular-quote="{{quote}}"></quotes-page>'
         }).
