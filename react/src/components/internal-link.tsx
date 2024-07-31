@@ -1,5 +1,5 @@
-export function InternalLink(props: { text: string }) {
-  return <a href='#!/phones'>{props.text}</a>
+export function InternalLink({ route = 'phones', text = 'Return Home' }) {
+  return <a href={'#!/' + route}>{text}</a>
 }
 
 InternalLink.tag = 'internal-link'
